@@ -1,0 +1,89 @@
+﻿
+<script type="text/javascript">
+    function exibirDlgNovaEntrada() {
+        $("#dlgNovaEstadia").modal("show");        
+    }
+
+    function fecharNovaEstadia() {
+        $("#dlgNovaEstadia").modal("hide");    
+        $('body').removeClass('modal-open');
+        $('.modal.backdrop').remove();
+
+        toastr["success"]("Veículo estacionado com sucesso.", "Atenção");
+    }
+
+    function exibirDlgSaidaEstadia() {
+        $("#dlgInfoSaidaEstadia").modal("show");  
+    }
+
+    function closeDlgInfoSaidaEstadia() {
+        $("#dlgInfoSaidaEstadia").modal("hide");
+        $('body').removeClass('modal-open');
+        $('.modal.backdrop').remove();
+
+        toastr["success"]("Veículo deixou o estacionamento com sucesso.", "Atenção");
+    }
+
+    function falharNovaEstadia(data) {
+        fecharNovaEstadia();
+
+        toastr.options = {
+            "closeButton": true,            
+            "positionClass": "toast-top-right"        
+        }
+
+        toastr["error"]("Veículo já se encontra estacionado.", "Atenção");
+        console.log(data);
+    }
+
+    function exibirDlgNovaSaida() {
+        $("#dlgSaidaEstadia").modal("show");  
+    }
+
+    function fecharNovaSaida() {
+        $("#dlgSaidaEstadia").modal("hide");        
+        $('body').removeClass('modal-open');
+        $('.modal.backdrop').remove();        
+
+        $("#dlgInfoSaidaEstadia").modal("show");
+    }
+
+    function teste() {
+        $("#dlgSaidaEstadia").modal("hide");
+        $('body').removeClass('modal-open');
+        $('.modal.backdrop').remove();   
+    }
+
+    function falharNovaSaida() {
+        $("#dlgSaidaEstadia").modal("hide");
+        $('body').removeClass('modal-open');
+        $('.modal.backdrop').remove();
+
+        toastr["error"]("Veículo não se encontra estacionado.", "Atenção");
+    }
+</script>
+
+<div class="alert alert-info">
+      
+    <a data-ajax="true"
+       data-ajax-loading="#loadAjax"
+       data-ajax-method="post"
+       data-ajax-mode="replace"
+       data-ajax-success="exibirDlgNovaEntrada"
+       data-ajax-update="#telaEntrada"
+       href="@Url.Action("NovaEntrada", "Home")"
+       class="btn btn-success">
+        <i class="glyphicon glyphicon-arrow-up"></i>Entrada
+    </a>
+
+    <a data-ajax="true"
+       data-ajax-loading="#loadAjax"
+       data-ajax-method="post"
+       data-ajax-mode="replace"
+       data-ajax-success="exibirDlgNovaSaida"
+       data-ajax-update="#telaNovaSaida"
+       href="@Url.Action("NovaSaida", "Home")"
+       class="btn btn-danger">
+        <i class="glyphicon glyphicon-arrow-down"></i>Saída
+    </a>
+</div>

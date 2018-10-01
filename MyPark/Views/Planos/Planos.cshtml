@@ -1,0 +1,36 @@
+﻿@using MyPark.Model.DataBase.Models
+@model IEnumerable<MyPark.Model.DataBase.Models.plano>
+
+@{
+    ViewBag.Title = "Planos";
+}
+
+<h2>Planos</h2>
+
+<script type="text/javascript">
+    function abrirTelaAddPlano() {
+        $("#dlgAddPlano").modal("show");
+    }
+</script>
+
+@Ajax.ActionLink("Cadastrar","ExibrirAddPlano",new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "addPlanos",
+    OnSuccess = "abrirTelaAddPlano",
+    LoadingElementId = "loadAjax",
+    InsertionMode = InsertionMode.Replace
+})
+
+<div id="tblPlanos">
+    @Html.Partial("_TabelaPlanos",Model)
+</div>
+
+<div id="addPlanos">
+    
+</div>
+
+<div id="loadAjax" style="display:none;">
+    <img src="~/Images/ajax-loading.gif" height="50" width="50" />"
+</div>
+
